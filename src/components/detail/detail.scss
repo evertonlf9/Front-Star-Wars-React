@@ -1,0 +1,148 @@
+@import '../../assets/scss/variables';
+
+#detail-component {
+    width: 100%;
+    height: calc(100vh - 20px);
+
+    .container-body {
+        overflow: auto;
+        width: 100%;
+        height: calc(100vh - 50px);
+    }
+
+    .container {
+
+        // position: absolute;
+        width: 100%;
+        padding: 20px 20px;
+        overflow: auto;
+        background: transparent;
+        // height: calc(100vh - 20px);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .container-header {
+            width: 35%;
+            display: flex;
+        }
+
+        .input-search {
+            background: white;
+            height: 35px;
+            padding: 0 10px;
+            font-size: 17px;
+            color: black;
+        }
+
+        .btn-search {
+            margin: 0 5px;
+            border: 1px solid;
+            width: 42px;
+            background-color: #f5f5f5;
+            border-radius: 50%;
+
+            mat-icon {
+                position: relative;
+                top: 5px;
+                left: 5px;
+            }
+        }
+
+        .cards {
+            max-width: 520px;
+            width: 100%;
+            height: 100%;
+            margin: 10px 5px;
+            border: 1px solid $red;
+            border: 1px solid $yellow;
+
+            .details {
+                float: left;
+                width: 100%;
+                border-top: 1px solid $yellow;
+
+                .category__paragraph {
+                    font-size: 16px;
+                    margin: 5px 12px;
+                    color: #d4d1d1;
+
+                    .characteristics {
+                        font-weight: 600;
+                    }
+                }
+
+                .details-cotent {
+                    width: 50%;
+                    float: left;
+                }
+
+                a {
+                    margin: 0 12px;
+                    color: $yellow;
+                    text-decoration-line: underline;
+                    cursor: pointer;
+                }
+            }
+
+            .descriptions {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .image {
+                position: relative;
+                max-height: 250px;
+                margin: 4px auto;
+                border-radius: 5%;
+                display: block;
+            }
+
+            .title {
+                background: #3c3b3b;
+                height: 40px;
+                text-align: center;
+                font-size: 16px;
+                font-weight: 600;
+                padding: 7px 0;
+                color: white;
+            }
+        }
+    }
+
+    .loader {
+        border: 10px solid #f3f3f3;
+        border-top: 10px solid #3498db;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        margin: 0 35px;
+        animation: spin 2s linear infinite;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+}
+
+@media screen and (max-width: $break-extra-small) {
+    #detail-component {
+        .container {
+            
+            .cards {    
+
+                .details {
+                    .details-cotent {
+                        width: 100%;
+                    }
+                }
+
+                .image {
+                    max-height: 150px !important;
+                }                
+            }
+           
+        }
+    }
+}

@@ -1,0 +1,76 @@
+@import '../../assets/scss/variables';
+
+#home-component {
+    width: 100%;
+    height: calc(100vh - 20px);
+    overflow: auto;
+
+    .container-header {
+        margin: 0 auto;
+        max-width: 485px;
+        height: 100px;
+        border-radius: 3px;
+        margin-top: 12%;
+    }
+
+    .container-title {
+        margin: 0px;
+        width: 482px;
+        height: 206px;
+        resize: none;
+        background-color: transparent;
+        border: 1px solid $red;
+        color: white;
+        margin: 10px 0;
+        text-align: center;
+        font-size: 15px;
+
+        .title {
+            font-size: 18px;
+        }
+    }
+
+    .button-start {
+        width: 100%;
+        background-color: transparent;
+        border: 1px solid $red;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    .section__logo {
+        transform-origin: left top;
+        animation: scale 2000ms ease-in-out forwards;
+
+    }
+    @keyframes scale {
+        to {
+            transform: scale(1);
+        }
+    }
+
+}
+
+.section__logo {
+  width: 30rem;
+  margin-bottom: 1rem;
+
+  @media screen and (max-width: $break-extra-small) {
+    width: 18rem;
+  }
+}
+
+@media screen and (max-width: $break-extra-small) {
+    .container-header {
+        max-width: 280px !important;
+        margin-top: 16% !important;
+
+        .container-title {
+            border: none !important;
+            display: initial;
+        }
+    }
+}
+

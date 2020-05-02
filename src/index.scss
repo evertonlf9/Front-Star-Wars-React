@@ -1,0 +1,84 @@
+@import "./assets/scss/variables";
+@import './assets/fonts/family.css';
+
+*, *::before, *::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    overflow: hidden;
+}
+
+body {
+    font-family: $primary-font;
+    font-size: 14px;
+    color: $font-color;
+    line-height: 1.5;
+    // background: $white-color;
+    padding: 0;
+    margin: 0;
+}
+
+.mat-paginator-range-label {    
+    color: white;
+    font-size: 15px;
+}
+
+.mat-paginator-page-size {
+    display: none !important;
+}
+
+.mat-paginator-navigation-first, .mat-paginator-navigation-previous, 
+.mat-paginator-navigation-next, .mat-paginator-navigation-last {
+    margin: 0 5px !important;
+}
+
+.not-found-result {
+    border: 1px solid $red;
+    padding: 20px 20px;
+    font-size: 18px;
+    color: $yellow;
+}
+
+@media only screen and (max-width: 1200px) {
+    .container-header {
+        width: 50% !important;
+    }
+}
+
+@media only screen and (max-width: 825px) {
+    .container-header {
+        width: 66% !important;
+    }
+}
+
+@media only screen and (max-width: 680px){
+    .dropdown {
+        display: inline-block !important;
+    }
+    .menu-link {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: $break-extra-small) {
+
+    .mat-paginator-range-actions {
+        display: inline-block !important;
+        text-align: center;
+        
+        .mat-paginator-range-label {
+            margin: 0px 32px 5px 24px;
+        }
+    }
+
+    .mat-icon-button {
+        width: auto !important;
+        height: auto !important;
+        line-height: 30px !important;
+    }
+}
