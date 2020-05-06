@@ -37,11 +37,21 @@ body {
     margin: 0 5px !important;
 }
 
+.hide{display: none !important;}
+
 .not-found-result {
     border: 1px solid $red;
     padding: 20px 20px;
     font-size: 18px;
     color: $yellow;
+}
+
+.container-spin {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    margin: 30% 0;
 }
 
 @media only screen and (max-width: 1200px) {

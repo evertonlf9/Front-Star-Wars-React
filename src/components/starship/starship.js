@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Spin } from 'antd';
 import { StarwarsActions } from '../../core/store';
 
 import MenuComponent from '../../core/components/menu/menu';
@@ -9,7 +10,7 @@ import ListComponent from '../../core/components/list/list';
 import './starship.scss';
 
 const Starship = (props) => {
-    const {getDataApi, data} = props;
+    const {getDataApi, data, loading} = props;
 
     useEffect(() => { 
         getData({type: 'starships', pageSize: 10, currentPage: 1, searchText: ''});
@@ -24,7 +25,12 @@ const Starship = (props) => {
         return (
             <div id="character-component">
                 <MenuComponent {...props}/>
-                <ListComponent {...props} getData={getData} type={'starships'} data={data.results} total={data.count} classType={'red'}/>
+                {loading && 
+                    <div className="container-spin">
+                        <Spin tip="Loading..." size="large"/>
+                    </div>
+                }                
+                {!loading && <ListComponent {...props} getData={getData} type={'starships'} data={data.results} total={data.count} classType={'red'}/>}
             </div>
         )
     }

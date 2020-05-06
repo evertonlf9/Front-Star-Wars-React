@@ -7,6 +7,26 @@ class Http {
 		});
 	}
 
+	getInstanceAxios () {
+		return {...this.instanceAxios};
+	}
+
+	getData(data, type, callback) {
+		const promisse = [];
+        if(data && typeof data !== 'string') {
+          data.forEach(url => {
+            promisse.push(this.getInstanceAxios().get(url))
+          });
+        }else if(data) {
+          promisse.push(this.getInstanceAxios().get(data));
+        }
+
+        Promise.all(promisse).then((results) => {
+			results = results.map((resp) => resp.data);
+			callback && callback(type, results);
+		});      
+	}
+
 	get(url, headers) {
 		let configs = {};
 

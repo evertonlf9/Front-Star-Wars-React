@@ -1,18 +1,16 @@
 import React, { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Layout, Button, Tabs, Row, Col, Spin, Icon } from 'antd';
+import { Button } from 'antd';
 import { StarwarsActions } from '../../core/store';
 
 import './home.scss';
 
-const { Header, Footer, Content } = Layout;
-const { TabPane } = Tabs;
-
 const Home = (props) => {
-  const {} = props;
+  const {history} = props;
+  const {push} = history;
 
-  useEffect(() => {    
+  useEffect(() => {   
     // playAudio();
   }, []);
 
@@ -22,7 +20,7 @@ const Home = (props) => {
   }  
 
   const handlerClickStart = () => {
-    // this.router.navigate(['/character']);
+    push('/character');
   }
   
   const render = () => {

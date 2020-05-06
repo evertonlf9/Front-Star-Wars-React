@@ -52,8 +52,8 @@ npm install
 
 ## Servidor de Desenvolvimento
 
-Execute no **Prompt de Comando** (caso você esteja no linux, basta utilizar o terminal) `ng start` para rodar o projeto em um servidor dev. Navegue para `http://localhost:3000/`. O aplicativo será recarregado automaticamente se você alterar qualquer um dos arquivos de origem.
+Execute no **Prompt de Comando** (caso você esteja no linux, basta utilizar o terminal) `npm start` para rodar o projeto em um servidor dev. Navegue para `http://localhost:3000/`. O aplicativo será recarregado automaticamente se você alterar qualquer um dos arquivos de origem.
 
 ## Servidor de Produção
 
-Execute no **Prompt de Comando** (caso você esteja no linux, basta utilizar o terminal) `ng build` para criar o projeto. Os arquivos de construção serão armazenados no diretório `dist/`. Use o sinalizador `--prod` para rodar o projeto em produção.
+Execute no **Prompt de Comando** (caso você esteja no linux, basta utilizar o terminal) `npm build` para criar o projeto. Os arquivos de construção serão armazenados no diretório `build`

@@ -3,7 +3,7 @@ import { Types as StarwarsTypes } from '../ducks/starwars';
 
 import Http from '../../services/repository';
 
-/*GET PEOPLE*/
+/*GET*/
 function getDataApiAPI(params) {
 	return Http.get(`${params.type}/?search=${params.searchText}&page=${params.currentPage}&size=${params.pageSize}`);
 }
@@ -27,4 +27,30 @@ function* getDataApi(action) {
 
 export function* getDataApiSaga() {
 	yield takeLatest(StarwarsTypes.GET_DATA_API, getDataApi);
+}
+
+/*GET DETAIL*/
+function getDetailApi(params) {
+	return Http.get(`${params.type}/${params.id}`);
+}
+
+function* getDetail(action) {
+    try {
+		const response = yield call(getDetailApi.bind(this, action.params));
+
+        yield put({
+            type: StarwarsTypes.SUCCESS_DETAIL,
+            response:response.data
+        });
+    }
+    catch (err) {
+        yield put({
+            type: StarwarsTypes.ERROR_DETAIL,
+            err
+        });
+    }
+}
+
+export function* getDetailSaga() {
+	yield takeLatest(StarwarsTypes.GET_DETAIL, getDetail);
 }

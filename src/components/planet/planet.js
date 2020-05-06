@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Spin } from 'antd';
 import { StarwarsActions } from '../../core/store';
 
 import MenuComponent from '../../core/components/menu/menu';
@@ -9,7 +10,7 @@ import ListComponent from '../../core/components/list/list';
 import './planet.scss';
 
 const Planet = (props) => {
-    const {getDataApi, data} = props;
+    const {getDataApi, data, loading} = props;
 
     useEffect(() => { 
         getData({type: 'species', pageSize: 10, currentPage: 1, searchText: ''});
@@ -24,13 +25,16 @@ const Planet = (props) => {
         return (
             <div id="character-component">
                 <MenuComponent {...props}/>
-                <ListComponent {...props} getData={getData} type={'planets'} data={data.results} total={data.count} classType={'red'}/>
+                {loading && 
+                    <div className="container-spin">
+                        <Spin tip="Loading..." size="large"/>
+                    </div>
+                }
+                {!loading && <ListComponent {...props} getData={getData} type={'planets'} data={data.results} total={data.count} classType={'red'}/>}
             </div>
         )
     }
-
-    return(<>{render()}</>)  
-  
+    return(<>{render()}</>);  
 }
 
 const mapStateToProps = state => {

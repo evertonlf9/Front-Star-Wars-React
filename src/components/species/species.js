@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Spin } from 'antd';
 import { StarwarsActions } from '../../core/store';
 
 import MenuComponent from '../../core/components/menu/menu';
@@ -9,7 +10,7 @@ import ListComponent from '../../core/components/list/list';
 import './species.scss';
 
 const Species = (props) => {
-    const {getDataApi, dataSpecies} = props;
+    const {getDataApi, dataSpecies, loading} = props;
 
     useEffect(() => { 
         getDataSpecies({type: 'species', pageSize: 10, currentPage: 1, searchText: ''});
@@ -24,7 +25,12 @@ const Species = (props) => {
         return (
             <div id="character-component">
                 <MenuComponent {...props}/>
-                <ListComponent {...props} getData={getDataSpecies} type={'species'} data={dataSpecies.results} total={dataSpecies.count} classType={'yellow'}/>
+                {loading && 
+                    <div className="container-spin">
+                        <Spin tip="Loading..." size="large"/>
+                    </div>
+                }
+                {!loading && <ListComponent {...props} getData={getDataSpecies} type={'species'} data={dataSpecies.results} total={dataSpecies.count} classType={'yellow'}/>}
             </div>
         )
     }

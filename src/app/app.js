@@ -1,31 +1,3 @@
-// import React from 'react';
-// import logo from '../logo.svg';
-// import './app.scss';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
@@ -55,7 +27,7 @@ function App(props) {
             <Route path="/starships" render={props => <Starship match={props.match} {...props}/>} />
             <Route path="/vehicles" render={props => <Vehicles match={props.match} {...props}/>} />
             <Route path="/films" render={props => <Films match={props.match} {...props}/>} />
-            <Route path="details/:type/:id" render={props => <Details match={props.match} {...props}/>} />
+            <Route path="/details/:type/:id" render={props => <Details match={props.match} {...props}/>} />
             <Route render={props => (<div>404</div>)} />
           </Switch>
         </>
