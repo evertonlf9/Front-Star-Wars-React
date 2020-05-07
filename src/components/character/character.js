@@ -25,8 +25,12 @@ const Character = (props) => {
     const render = () => {
         
         return (
-            <div id="character-component">               
-                <MenuComponent {...props}/>
+            <div id="character-component">   
+                <MenuComponent {...props}/>   
+                <div className="starOne"></div>
+                <div className="starTwo"></div>
+                <div className="starThree"></div> 
+                
                  {loading && 
                     <div className="container-spin">
                         <Spin tip="Loading..." size="large"/>

@@ -27,7 +27,10 @@ const Home = (props) => {
     
     return (
       <div id="home-component">
-          <audio id="audio-element" src="./assets/sound/sound.mp3" loop autoPlay/>
+        <div className="starOne"></div>
+        <div className="starTwo"></div>
+        <div className="starThree"></div>  
+        <audio id="audio-element" src="./assets/sound/sound.mp3" loop autoPlay/>
 
         <div className="container-header">
             <header className="section--align-center">

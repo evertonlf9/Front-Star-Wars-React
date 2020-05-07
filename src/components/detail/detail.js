@@ -198,8 +198,12 @@ const Detail = (props) => {
     const render = () => {      
         return (
             <div id="detail-component">
-                <audio id="audio" src="./assets/sound/Imperial _March.mp3" loop autoPlay/>
                 <MenuComponent {...props}/>
+                <div className="starOne"></div>
+                <div className="starTwo"></div>
+                <div className="starThree"></div>  
+                <audio id="audio" src="./assets/sound/Imperial _March.mp3" loop autoPlay/>
+
                 {renderBody()}
             </div>
         )
