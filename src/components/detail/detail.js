@@ -16,7 +16,7 @@ const Detail = (props) => {
     const [dataInfoKeys, setDataInfoKeys] = useState('');
     const [dataInfoLabels, setDataInfoLabels] = useState('');
 
-    const {getDetail, setListDetail, dataDetail, loading, match, films, starships, species, vehicles, homeworld, pilots, characters, planets} = props;
+    const {getDetail, getData, setListDetail, dataDetail, loading, match, films, starships, species, vehicles, homeworld, pilots, characters, planets} = props;
     
 
     useEffect(() => { 
@@ -35,6 +35,10 @@ const Detail = (props) => {
         }
         getAllInfo();
     }, [dataDetail]);
+    
+    useEffect(() => {
+        getAllInfo();
+    }, [films, homeworld, starships, species, vehicles, pilots, characters, planets]);
 
     const getImage = (item) => {
         if(item && !Array.isArray(item)) {
@@ -64,36 +68,46 @@ const Detail = (props) => {
     }
 
     const getAllInfo = () => {
-        if(dataDetail.length === 0) return;
 
-        if(dataDetail.starships && dataDetail.starships.length > 0)
-          Repository.getData(dataDetail.starships, 'starships', successReponse);
+        if(starships.length === 0 && dataDetail.starships && dataDetail.starships.length > 0) {
+            getData({data: dataDetail.starships, type: 'starships'});
+            return;
+        }
+
+        if(films.length ===0 && dataDetail.films && dataDetail.films.length > 0) {
+            getData({data: dataDetail.films, type: 'films'});
+            return
+        }
      
-        if(dataDetail.films && dataDetail.films.length > 0)
-            Repository.getData(dataDetail.films, 'films', successReponse);
+        if(species.length === 0 && dataDetail.species && dataDetail.species.length > 0) {
+            getData({data: dataDetail.species, type: 'species'});
+            return
+        }
         
-        if(dataDetail.species && dataDetail.species.length > 0)
-            Repository.getData(dataDetail.species, 'species', successReponse);
+        if(vehicles.length === 0 && dataDetail.vehicles && dataDetail.vehicles.length > 0) {
+            getData({data: dataDetail.vehicles, type: 'vehicles'});
+            return
+        }
+                
+        if(homeworld.length === 0 && dataDetail.homeworld && dataDetail.homeworld.length > 0) {
+            getData({data: dataDetail.homeworld, type: 'homeworld'});
+            return
+        }    
+       
+        if(pilots.length === pilots && dataDetail.pilots && dataDetail.pilots.length > 0) {
+            getData({data: dataDetail.pilots, type: 'pilots'});
+            return
+        }    
         
-        if(dataDetail.vehicles && dataDetail.vehicles.length > 0)
-            Repository.getData(dataDetail.vehicles, 'vehicles', successReponse);
-    
-        if(dataDetail.homeworld && dataDetail.homeworld.length > 0)
-            Repository.getData(dataDetail.homeworld, 'homeworld', successReponse);
-    
-        if(dataDetail.pilots && dataDetail.pilots.length > 0)
-            Repository.getData(dataDetail.pilots, 'pilots', successReponse);
-    
-        if(dataDetail.characters && dataDetail.characters.length > 0)
-            Repository.getData(dataDetail.characters, 'characters', successReponse);
+        if(characters.length === 0 &&dataDetail.characters && dataDetail.characters.length > 0) {
+            getData({data: dataDetail.characters, type: 'characters'});
+            return
+        }
         
-        if(dataDetail.planets && dataDetail.planets.length > 0)
-            Repository.getData(dataDetail.planets, 'planets', successReponse);
-    }
-
-    const successReponse = (type, results) => { 
-        console.log('successReponse', results)
-        // setListDetail({type, data: results}); 
+        if(planets.length === 0 && dataDetail.planets && dataDetail.planets.length > 0) {
+            getData({data: dataDetail.planets, type: 'planets'});
+            return
+        }        
     }
 
     const renderCard = () => {
@@ -130,156 +144,21 @@ const Detail = (props) => {
             );
     }
 
-    const renderContent = () => {
+    const renderContent = (data, type, title) => {
         return(
             <div className="details-cotent">
-                {(dataDetail.starships && dataDetail.starships.length > 0) &&
-                    <p className="category__paragraph">
-                        <span className="characteristics">
-                            Naves estelares:
-                        </span>
-                    </p>
-                }
+                <p className="category__paragraph">
+                    <span  className="characteristics">
+                        {title}:
+                    </span>
+                </p>
 
-                {(starships.length === 0 && dataDetail.starships &&  dataDetail.starships.length > 0)  && <div className="loader"></div>}
+                {(data.length === 0) && <div className="loader"></div>}
 
                 <div className="descriptions">
-                    {starships.length > 0 && 
-                        starships.map((starship, id)=>{
-                            return (
-                                <a onClick={handlerClickMoreInfo(starship, 'starships')} key={id}>{starship.name}</a>
-                            )
-                        })
-                    }                                        
-                </div>
-
-                {(dataDetail.homeworld && dataDetail.homeworld.length > 0) &&
-                    <p className="category__paragraph">
-                        <span className="characteristics">                            
-                            Planeta Natal:
-                        </span>
-                    </p>
-                }
-
-                {(homeworld.length === 0  && dataDetail.homeworld && dataDetail.homeworld.length > 0) && <div className="loader"></div>}
-
-                <div className="descriptions">
-                    {homeworld.length > 0 &&
-                        homeworld.map((homeworld, id)=>{
-                            return (
-                                <a onClick={handlerClickMoreInfo(homeworld, 'homeworld')} key={id}>{homeworld.name}</a>
-                            )
-                        })
-                    }                                         
-                </div>
-
-                {(dataDetail.films && dataDetail.films.length > 0) &&
-                    <p className="category__paragraph">
-                        <span  className="characteristics">
-                            Films:
-                        </span>
-                    </p>
-                }
-
-                {(films.length === 0 && dataDetail.films && dataDetail.films.length > 0) && <div className="loader"></div>}
-                <div className="descriptions">
-                    {
-                        films.map((film, id)=>{
-                            return (
-                                <a onClick={handlerClickMoreInfo(film, 'films')} key={id}>{film.title}</a>
-                            )
-                        })
-                    }                                         
-                </div>
-
-                {(dataDetail.vehicles && dataDetail.vehicles.length > 0) &&
-                    <p className="category__paragraph">
-                        <span  className="characteristics">
-                            Veiculos:
-                        </span>
-                    </p>
-                }
-                {(vehicles.length === 0 && dataDetail.vehicles && dataDetail.vehicles.length > 0) && <div className="loader"></div>}
-                <div className="descriptions">
-                    {vehicles.length > 0 &&
-                        vehicles.map((vehicle, id)=>{
-                            return (
-                                <a onClick={handlerClickMoreInfo(vehicle, 'vehicles')} key={id}>{vehicle.name}</a>
-                            )
-                        })
-                    }                                        
-                </div>
-
-                {(dataDetail.species && dataDetail.species.length > 0) &&
-                    <p className="category__paragraph">
-                        <span  className="characteristics">
-                            Espécies:
-                        </span>
-                    </p>
-                }
-                {(species.length === 0  && dataDetail.species && dataDetail.species.length > 0) && <div className="loader"></div>}
-                <div className="descriptions">
-                    {species.length > 0 && 
-                        species.map((species, id)=>{
-                            return (
-                                <a onClick={handlerClickMoreInfo(species, 'species')} key={id}>{species.name}</a>
-                            )
-                        })
-                    }                                        
-                </div>
-
-                {(dataDetail.characters && dataDetail.characters.length > 0) && 
-                    <p className="category__paragraph">
-                        <span  className="characteristics">
-                            Personagens:
-                        </span>
-                    </p>
-                }
-                {(characters.length === 0  && dataDetail.characters && dataDetail.characters.length > 0) && <div className="loader"></div>}
-                <div className="descriptions">
-                    {characters.length > 0 &&
-                        characters.map((character, id)=>{
-                            return (
-                                <a onClick={handlerClickMoreInfo(character, 'characters')} key={id}>{character.name}</a>
-                            )
-                        })
-                    }                                         
-                </div>
-
-                {(dataDetail.planets && dataDetail.planets.length > 0) &&
-                    <p className="category__paragraph">
-                        <span  className="characteristics">
-                            Planetas:
-                        </span>
-                    </p>
-                }
-                {(planets.length === 0  && dataDetail.planets && dataDetail.planets.length > 0) && <div className="loader"></div>}
-                <div className="descriptions">
-                    {planets.length > 0 && 
-                        planets.map((planet, id)=>{
-                            return (
-                                <a onClick={handlerClickMoreInfo(planet, 'planets')} key={id}>{planet.name}</a>
-                            )
-                        })
+                    {(data.length > 0) &&
+                        data.map((item, id) => (<a onClick={handlerClickMoreInfo.bind(this, item, type)} key={id}>{item.title || item.name}</a>))                        
                     } 
-                </div>
-
-                {(dataDetail.pilots && dataDetail.pilots.length > 0) &&
-                    <p className="category__paragraph">
-                        <span  className="characteristics">
-                            Pilotos:
-                        </span>
-                    </p>
-                }
-                {(pilots.length === 0 && dataDetail.pilots && dataDetail.pilots.length > 0) && <div className="loader"></div>}
-                <div className="descriptions">
-                    {pilots.length &&
-                        pilots.map((pilot, id)=>{
-                            return (
-                                <a onClick={handlerClickMoreInfo(pilot, 'pilots')} key={id}>{pilot.name}</a>
-                            )
-                        })
-                    }                                        
                 </div>
             </div>
         );
@@ -297,7 +176,14 @@ const Detail = (props) => {
                                 <div className="details-cotent">
                                     {renderDetails(dataKeyLabels)}                                    
                                 </div>
-                               {renderContent()}
+                               {(dataDetail.starships && dataDetail.starships.length > 0) && renderContent(starships, 'starships', 'Naves estelares')}
+                               {(dataDetail.homeworld && dataDetail.homeworld.length > 0) && renderContent(homeworld, 'homeworld', 'Planeta Natal')}
+                               {(dataDetail.films && dataDetail.films.length > 0) && renderContent(films, 'films', 'Films')}
+                               {(dataDetail.vehicles && dataDetail.vehicles.length > 0) && renderContent(vehicles, 'vehicles', 'Veiculos')}
+                               {(dataDetail.species && dataDetail.species.length > 0) && renderContent(species, 'species', 'Espécies')}
+                               {(dataDetail.characters && dataDetail.characters.length > 0) && renderContent(characters, 'characters', 'Personagens')}
+                               {(dataDetail.planets && dataDetail.planets.length > 0) && renderContent(planets, 'planets', 'Planetas')}
+                               {(dataDetail.pilots && dataDetail.pilots.length > 0) && renderContent(pilots, 'pilots', 'Pilotos')}
                             </div>
                         </div>       
                         

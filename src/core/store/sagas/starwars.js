@@ -54,3 +54,29 @@ function* getDetail(action) {
 export function* getDetailSaga() {
 	yield takeLatest(StarwarsTypes.GET_DETAIL, getDetail);
 }
+
+/*GET DATA*/
+function getDataAPI(params) {
+	return Http._getData(params.data, params.type);
+}
+
+function* getData(action) {
+    try {
+		const response = yield call(getDataAPI.bind(this, action.params));
+
+        yield put({
+            type: StarwarsTypes.SUCCESS_DATA,
+            response:{ data: response.data, type: response.type}
+        });
+    }
+    catch (err) {
+        yield put({
+            type: StarwarsTypes.ERROR_DATA,
+            err
+        });
+    }
+}
+
+export function* getDataSaga() {
+	yield takeLatest(StarwarsTypes.GET_DATA, getData);
+}

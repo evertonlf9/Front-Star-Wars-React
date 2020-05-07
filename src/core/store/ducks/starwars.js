@@ -8,21 +8,24 @@ export const { Types, Creators } = createActions({
 	setListDetail: ['params'],
 	getDetail: ['params'],
 	successDetail: [],
-	errorDetail: []
+	errorDetail: [],
+
+	getData:['params'],
+	successData: [],
+	errorData: []
 });
 
 const initialState = {
 	data: [],
-	dataDetail: [],
-	films: [],
+	dataDetail: [],	
 	starships: [],
 	species: [],
-	vehicles: [],
 	vehicles: [],
 	homeworld: [],
 	pilots: [],
 	characters: [],
 	planets: [],
+	films: [],
 	loading: false,
 	error: false
 };
@@ -79,6 +82,27 @@ const errorDetail = (state = initialState, action) => ({
 	error: action.err
 });
 
+const getData = (state = initialState, action) => {
+	return {
+		...state
+	}
+};
+
+const successData = (state = initialState, action) => ({
+	...state,
+	[action.response.type]: action.response.data,
+	loading: false,
+	error: false
+});
+
+const errorData = (state = initialState, action) => ({
+	...state,
+	dataDetail: [],
+	loading: false,
+	error: action.err
+});
+
+
 export default createReducer(initialState, {
 	[Types.GET_DATA_API]: getDataApi,
 	[Types.SUCCESS_DATA_API]: successDataApi,
@@ -88,4 +112,8 @@ export default createReducer(initialState, {
 	[Types.GET_DETAIL]: getDetail,
 	[Types.SUCCESS_DETAIL]: successDetail,
 	[Types.ERROR_DETAIL]: errorDetail,
+
+	[Types.GET_DATA]: getData,
+	[Types.SUCCESS_DATA]: successData,
+	[Types.ERROR_DATA]: errorData,
 });

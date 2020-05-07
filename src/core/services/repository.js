@@ -22,9 +22,27 @@ class Http {
         }
 
         Promise.all(promisse).then((results) => {
-			results = results.map((resp) => resp.data);
+			results = results.map((resp) => resp.data); 
 			callback && callback(type, results);
 		});      
+	}
+	
+	_getData(data, type) {
+		const promisse = [];
+        if(data && typeof data !== 'string') {
+          data.forEach(url => {
+            promisse.push(this.getInstanceAxios().get(url))
+          });
+        }else if(data) {
+          promisse.push(this.getInstanceAxios().get(data));
+        }          
+		
+		return new Promise((resolve, reject) => 
+			Promise.all(promisse).then((results) => {
+				results = results.map((resp) => resp.data);
+				resolve({data: results, type: type});
+			}).catch((err) => reject(err))
+		);
 	}
 
 	get(url, headers) {
