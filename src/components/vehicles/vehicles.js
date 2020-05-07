@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
@@ -10,6 +10,7 @@ import ListComponent from '../../core/components/list/list';
 import './vehicles.scss';
 
 const Vehicles = (props) => {
+    const [paginate, setPaginate] = useState('');
     const {getDataApi, data, loading} = props;
 
     useEffect(() => { 
@@ -17,6 +18,7 @@ const Vehicles = (props) => {
     }, []); 
 
     const getData = (params) => {
+        setPaginate(params);
         getDataApi(params);
     }
   
@@ -30,7 +32,7 @@ const Vehicles = (props) => {
                         <Spin tip="Loading..." size="large"/>
                     </div>
                 }                
-                {!loading && <ListComponent {...props} getData={getData} type={'vehicles'} data={data.results} total={data.count} classType={'red'}/>}
+                {!loading && <ListComponent {...props} getData={getData} paginate={paginate} type={'vehicles'} data={data.results} total={data.count} classType={'red'}/>}
             </div>
         )
     }

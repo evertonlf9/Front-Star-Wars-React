@@ -50,6 +50,8 @@
             height: 100%;
             margin: 10px 5px;
             border: 1px solid $yellow;
+            border-radius: 15px;
+
             .details {
                 float: left;
                 width: 56%;
@@ -120,8 +122,28 @@
                 font-weight: 600;
                 padding: 7px 0;
                 color: white;
+                border-top-right-radius: 15px;
+                border-top-left-radius: 15px;
             }
         }   
+
+        .ant-pagination {
+            .ant-pagination-total-text {color: white;}
+            .ant-pagination-item {
+                color: black;
+                font-weight: 700;
+            }
+
+            .ant-pagination-item-link{
+                font-weight: 700;
+                color: black;
+            }
+
+            .ant-pagination-item {border-color: #d9d9d9 !important;}
+
+            .ant-pagination-jump-next, .ant-pagination-jump-prev, .ant-pagination-prev, .ant-pagination-next, .ant-pagination-item  {background-color: #fff !important; margin: 0 1px;}
+            .ant-pagination-item-ellipsis {color: rgba(0, 0, 0, 1);}
+        }
         
         .cards-red {
             border: 1px solid $red;
@@ -131,7 +153,7 @@
 
 @media screen and (max-width: $break-extra-small) {
     .container {
-        padding: 20px 5px !important;
+        padding: 15px 5px !important;
         .cards {    
 
             .details {

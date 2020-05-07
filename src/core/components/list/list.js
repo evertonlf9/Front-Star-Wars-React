@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Input } from 'antd';
+import { Input, Pagination  } from 'antd';
 import { SearchOutlined, DeleteOutlined } from '@ant-design/icons';
 
 import {Labels} from '../../constants/constants';
@@ -7,26 +7,19 @@ import {Labels} from '../../constants/constants';
 import './list.scss';
 
 const ListComponent = (props) => {
-    const [paginate, setPaginate] = useState('');
+    const [searchText, setSearchText] = useState('');
     const [dataKeyLabels, setDataKeyLabels] = useState('');
     const [dataLabels, setDataLabels] = useState('');
-    const {loading, getData, data, total, classType, type, history} = props;
+    const {loading, getData, data, total, classType, type, history, paginate} = props;
     const {push} = history;
   
-    useEffect(() => {    
-        setPaginate({
-            type: type,
-            pageSize: 10,
-            currentPage: 1,
-            search: ''
-        });
-
+    useEffect(() => {          
         setDataLabels(Labels[type])
         setDataKeyLabels(Object.keys(Labels[type]))
     }, []);
 
     const handlerClickSearch = () => {
-        getData(paginate);
+        getData({ ...paginate, searchText });
     }
     
     const handlerKeyPressSearch = (e) => {
@@ -37,17 +30,17 @@ const ListComponent = (props) => {
     
     const handlerKeyPress = (e) => {
         if(e['keyCode'] === 13 && !loading) {
-            getData(paginate);
+            getData({ ...paginate, searchText });
         }
     }
   
     const handlerClickClearSearch = () => {
-        setPaginate({
+        getData({
+            ...paginate,
             pageSize: 10,
-            currentPage: 0,
+            currentPage: 1,
             searchText: ''
-        })
-        getData(paginate);
+        });
     }
     
     const handlerKeyPressClearSearch = (e) => {
@@ -57,22 +50,30 @@ const ListComponent = (props) => {
     }
 
     const handleChange = (e) => {
-        setPaginate({...paginate, searchText: e.currentTarget.value});
+        setSearchText(e.currentTarget.value);
     }
 
-  const renderSearch = () => {
-    return(
-        <div className="container-header">
-            <Input id="search" disabled={loading} className="input-search" placeholder="Pesquisar um personagem pelo nome" value={paginate.searchText} maxLength="255" onChange={handleChange} onKeyPress={handlerKeyPress} />
-            <div className="btn-search" onClick={handlerClickSearch} onKeyPress={handlerKeyPressSearch} tabIndex="0" aria-label="Pesquisar" role="button">
-                <SearchOutlined />
+    const handleChangePagination = (page, pageSize) => {
+        getData({ ...paginate, pageSize, currentPage: page, searchText });       
+    }
+    
+    const handleChangeSize = (current, size) => {
+        getData({ ...paginate, pageSize: size, currentPage: current, searchText });       
+    }
+
+    const renderSearch = () => {
+        return(
+            <div className="container-header">
+                <Input id="search" disabled={loading} className="input-search" placeholder="Pesquisar um personagem pelo nome" value={searchText} maxLength="255" onChange={handleChange} onKeyPress={handlerKeyPress} />
+                <div className="btn-search" onClick={handlerClickSearch} onKeyPress={handlerKeyPressSearch} tabIndex="0" aria-label="Pesquisar" role="button">
+                    <SearchOutlined />
+                </div>
+                <div className="btn-search" onClick={handlerClickClearSearch} onKeyPress={handlerKeyPressClearSearch} tabIndex="0" aria-label="Limpar a pesquisa" role="button">
+                    <DeleteOutlined />
+                </div>
             </div>
-            <div className="btn-search" onClick={handlerClickClearSearch} onKeyPress={handlerKeyPressClearSearch} tabIndex="0" aria-label="Limpar a pesquisa" role="button">
-                <DeleteOutlined />
-            </div>
-        </div>
-    )
-  }
+        )
+    }
 
     const getImage = (item) => {
         const key = item['url'].split("/")[5];
@@ -90,7 +91,18 @@ const ListComponent = (props) => {
 
     const renderPagination = () => {
         return(
-            <div></div>
+            <Pagination
+                total={total}
+                showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
+                pageSize={paginate.pageSize || 10}
+                current={paginate.currentPage || 1}
+                defaultCurrent={1}
+                responsive={true}
+                hideOnSinglePage={true}
+                showSizeChanger={false}
+                onChange={handleChangePagination.bind(this)}
+                onShowSizeChange={handleChangeSize.bind(this)}
+            />
         )
     }
 
@@ -131,7 +143,7 @@ const ListComponent = (props) => {
                 data.map((item, key) => {
                     return (
                         <div className={`cards ${classType === 'red' ? 'cards-red' : '' }`} key={key}>
-                            <div className="title" tabIndex="0">{item.name}</div>
+                            <div className="title" tabIndex="0">{item.name || item.title}</div>
                             {getImage(item) && <img id={'img-' + key} className={`${classType === 'red' ? 'image-red' : ''} ${classType !== 'red' ? 'image' : ''}`} src={getImage(item)} onError={notFoundImage.bind(this, key)}/> }
                             <div className={`${classType === 'red' ? 'details-red' : ''} ${classType !== 'red' ?  'details' : ''}`}>
                                 {renderCategory(item)}

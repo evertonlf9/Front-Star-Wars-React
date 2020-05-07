@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
@@ -10,13 +10,15 @@ import ListComponent from '../../core/components/list/list';
 import './character.scss';
 
 const Character = (props) => {
+    const [paginate, setPaginate] = useState('');
     const {getDataApi, dataPeople, loading} = props;
 
-    useEffect(() => { 
+    useEffect(() => {         
         getCharacter({type: 'people', pageSize: 10, currentPage: 1, searchText: ''});
     }, []); 
 
     const getCharacter = (params) => {
+        setPaginate(params);
         getDataApi(params);
     }
   
@@ -30,7 +32,7 @@ const Character = (props) => {
                         <Spin tip="Loading..." size="large"/>
                     </div>
                 }                
-                {!loading && <ListComponent {...props} getData={getCharacter} type={'people'} data={dataPeople.results} total={dataPeople.count} classType={'yellow'} />}
+                {!loading && <ListComponent {...props} getData={getCharacter} paginate={paginate} type={'people'} data={dataPeople.results} total={dataPeople.count} classType={'yellow'} />}
             </div>
         )
     }

@@ -13,10 +13,9 @@ import App from './app/app';
 import 'antd/dist/antd.css';
 import './index.scss';
 
-const initialState = {};
+// const initialState = {};
 
-
-const store = configureStore({initialState});
+const store = configureStore();
 
 ReactDOM.render(
     <Provider store={store}>

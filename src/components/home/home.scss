@@ -42,6 +42,7 @@
 
     .section__logo {
         transform-origin: left top;
+        transform: scale(0.1);
         animation: scale 2000ms ease-in-out forwards;
 
     }
@@ -65,7 +66,7 @@
 @media screen and (max-width: $break-extra-small) {
     .container-header {
         max-width: 280px !important;
-        margin-top: 16% !important;
+        margin-top: 3% !important;
 
         .container-title {
             border: none !important;

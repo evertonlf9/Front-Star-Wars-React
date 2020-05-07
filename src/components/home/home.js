@@ -11,7 +11,7 @@ const Home = (props) => {
   const {push} = history;
 
   useEffect(() => {   
-    // playAudio();
+    playAudio();
   }, []);
 
   const playAudio = () => {

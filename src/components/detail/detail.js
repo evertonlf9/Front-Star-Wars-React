@@ -15,16 +15,12 @@ const Detail = (props) => {
     const [dataInfo, setDataInfo] = useState('');
     const [dataInfoKeys, setDataInfoKeys] = useState('');
     const [dataInfoLabels, setDataInfoLabels] = useState('');
-    const [type, setType] = useState('');
-    const [id, setId] = useState('');
 
     const {getDetail, setListDetail, dataDetail, loading, match, films, starships, species, vehicles, homeworld, pilots, characters, planets} = props;
     
 
     useEffect(() => { 
-        const _type= match.params.type
-        setId(match.params.id);
-        setType(_type);
+        const _type= match.params.type;
         setDataLabels(Labels[_type]);
         setDataKeyLabels(Object.keys(Labels[_type]));
         getDetail({id: match.params.id, type: _type});
@@ -33,11 +29,11 @@ const Detail = (props) => {
     useEffect(() => {
         if(dataDetail.name === "Darth Vader") {
             const audio = document.getElementById('audio');
-            // try{
-            //     if(audio) audio['play']();
-            // }catch(e){}
+            try{
+                if(audio) audio['play']();
+            }catch(e){}
         }
-        // getAllInfo();
+        getAllInfo();
     }, [dataDetail]);
 
     const getImage = (item) => {

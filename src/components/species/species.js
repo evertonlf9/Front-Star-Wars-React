@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
@@ -10,6 +10,7 @@ import ListComponent from '../../core/components/list/list';
 import './species.scss';
 
 const Species = (props) => {
+    const [paginate, setPaginate] = useState('');
     const {getDataApi, dataSpecies, loading} = props;
 
     useEffect(() => { 
@@ -17,6 +18,7 @@ const Species = (props) => {
     }, []); 
 
     const getDataSpecies = (params) => {
+        setPaginate(params);
         getDataApi(params);
     }
   
@@ -30,7 +32,7 @@ const Species = (props) => {
                         <Spin tip="Loading..." size="large"/>
                     </div>
                 }
-                {!loading && <ListComponent {...props} getData={getDataSpecies} type={'species'} data={dataSpecies.results} total={dataSpecies.count} classType={'yellow'}/>}
+                {!loading && <ListComponent {...props} getData={getDataSpecies} paginate={paginate} type={'species'} data={dataSpecies.results} total={dataSpecies.count} classType={'yellow'}/>}
             </div>
         )
     }
