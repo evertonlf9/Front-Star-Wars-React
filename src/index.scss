@@ -77,21 +77,3 @@ body {
         display: none !important;
     }
 }
-
-@media screen and (max-width: $break-extra-small) {
-
-    .mat-paginator-range-actions {
-        display: inline-block !important;
-        text-align: center;
-        
-        .mat-paginator-range-label {
-            margin: 0px 32px 5px 24px;
-        }
-    }
-
-    .mat-icon-button {
-        width: auto !important;
-        height: auto !important;
-        line-height: 30px !important;
-    }
-}

@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Repository from '../../core/services/repository';
 import { StarwarsActions } from '../../core/store';
+import soundfile from '../../assets/sound/Imperial _March.mp3';
 
 import MenuComponent from '../../core/components/menu/menu';
 import {Labels} from '../../core/constants/constants';
@@ -49,8 +50,15 @@ const Detail = (props) => {
     }
 
     const notFoundImage = (data, key) => {
-        console.log(data);
         document.getElementById('img-' + key).src = `./assets/img/big-placeholder.jpg`;
+    }
+
+    const checkedHiddenInfo = (key)=> {
+        if(typeof dataInfo[key] === 'string' && dataInfo[key].split('http').length > 1)
+            return '';
+   
+       if(typeof dataInfo[key] === 'object' || !dataInfoLabels[key])
+       return 'hide'; 
     }
 
     const checkedHidden = (key)=> {
@@ -117,7 +125,18 @@ const Detail = (props) => {
                     <div className="title">{dataInfo.name || dataInfo.title}</div>
                     <img id={`img-${0}`} className="image" src={getImage(dataInfo)} onError={notFoundImage.bind(this, dataInfo)}/> 
                     <div className="details"> 
-                        {renderDetails(dataInfoKeys)}
+                        {
+                            dataInfoKeys.map((_key, id) => {
+                                return(
+                                    <p className={`category__paragraph ${checkedHiddenInfo(_key)}`} style={{marginTop: '15px'}} key={id}> 
+                                        <span className="characteristics">
+                                            {dataInfoLabels[_key]}:
+                                        </span>
+                                        {dataInfo[_key]}
+                                    </p>
+                                );
+                            })
+                        }
                     </div>
                 </div>
             </>
@@ -187,7 +206,7 @@ const Detail = (props) => {
                             </div>
                         </div>       
                         
-                        {dataInfo.length > 0 && renderCard()}
+                        {dataInfo && renderCard()}
                         
                     </div>
                 }
@@ -196,13 +215,14 @@ const Detail = (props) => {
     }
   
     const render = () => {      
+
         return (
             <div id="detail-component">
                 <MenuComponent {...props}/>
                 <div className="starOne"></div>
                 <div className="starTwo"></div>
                 <div className="starThree"></div>  
-                <audio id="audio" src="./assets/sound/Imperial _March.mp3" loop autoPlay/>
+                <audio id="audio" src={soundfile} loop autoPlay/>
 
                 {renderBody()}
             </div>

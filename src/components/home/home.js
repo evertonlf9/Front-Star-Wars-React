@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
 import { StarwarsActions } from '../../core/store';
+import soundfile from '../../assets/sound/sound.mp3';
 
 import './home.scss';
 
@@ -30,7 +31,7 @@ const Home = (props) => {
         <div className="starOne"></div>
         <div className="starTwo"></div>
         <div className="starThree"></div>  
-        <audio id="audio-element" src="./assets/sound/sound.mp3" loop autoPlay/>
+        <audio id="audio-element" src={soundfile} loop autoPlay/>
 
         <div className="container-header">
             <header className="section--align-center">
