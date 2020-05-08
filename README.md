@@ -9,6 +9,7 @@ Everton Ferreira
 - [Visão Geral do Projeto](#visão-geral-do-projeto)
   - [Tecnologias](#tecnologias)
   - [Documentação Star Wars API](#documentação-star-wars-api)
+- [Demonstração](#demonstracao)
 - [Informações Iniciais](#informações-iniciais)
   - [Clonando o Repositório](#clonando-o-repositório)
   - [Instalando as Dependências](#instalando-as-dependências)
@@ -32,6 +33,9 @@ O principal objetivo do desafio é o desenvolvimento de uma aplicação que exib
 
 ### Documentação Star Wars API
 A documentação da API utilizada para obter os dados está disponível em: [SWAPI](https://swapi.co/).
+
+### Demonstração
+ - [Demo](https://starwarsreactjs.herokuapp.com/)
 
 ## Informações Iniciais
 Para realizar as passos a seguir, será necessário que tenha instalado em seu computador o **git** e o **node.js**. Abaixo seguem os sites para realizar o download e efetuar a instalação:
