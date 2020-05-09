@@ -31,7 +31,7 @@ export function* getDataApiSaga() {
 
 /*GET DETAIL*/
 function getDetailApi(params) {
-	return Http.get(`${params.type}/${params.id}`);
+	return Http.get(`${params.type}/${params.id}/`);
 }
 
 function* getDetail(action) {
