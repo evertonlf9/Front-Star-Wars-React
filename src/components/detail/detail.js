@@ -49,8 +49,8 @@ const Detail = (props) => {
         }
     }
 
-    const notFoundImage = (data, key) => {
-        document.getElementById('img-' + key).src = `./assets/img/big-placeholder.jpg`;
+    const notFoundImage = (key) => {
+        document.getElementById(key).src = `../../assets/img/big-placeholder.jpg`;
     }
 
     const checkedHiddenInfo = (key)=> {
@@ -123,7 +123,7 @@ const Detail = (props) => {
             <>
                 <div className="cards"> 
                     <div className="title">{dataInfo.name || dataInfo.title}</div>
-                    <img id={`img-${0}`} className="image" src={getImage(dataInfo)} onError={notFoundImage.bind(this, dataInfo)}/> 
+                    <img id="img-0" className="image" src={getImage(dataInfo)} onError={notFoundImage.bind(this, 'img-0')}/> 
                     <div className="details"> 
                         {
                             dataInfoKeys.map((_key, id) => {
@@ -190,7 +190,7 @@ const Detail = (props) => {
                     <div className="container">
                         <div className="cards"> 
                             <div className="title">{dataDetail.name}</div>
-                            {dataDetail && <img className="image" src={getImage(dataDetail)}/>} 
+                            {dataDetail && <img id="detatail-img" className="image" src={getImage(dataDetail)} onError={notFoundImage.bind(this, 'detatail-img')}/>} 
                             <div className="details"> 
                                 <div className="details-cotent">
                                     {renderDetails(dataKeyLabels)}                                    
