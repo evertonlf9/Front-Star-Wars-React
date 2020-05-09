@@ -222,7 +222,7 @@ const Detail = (props) => {
                 <div className="starOne"></div>
                 <div className="starTwo"></div>
                 <div className="starThree"></div>  
-                <audio id="audio" src={soundfile} loop autoPlay/>
+                <audio id="audio" src={soundfile} loop/>
 
                 {renderBody()}
             </div>
