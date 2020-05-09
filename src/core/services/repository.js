@@ -15,9 +15,11 @@ class Http {
 		const promisse = [];
         if(data && typeof data !== 'string') {
           data.forEach(url => {
+			  console.log(url)
             promisse.push(this.getInstanceAxios().get(url))
           });
         }else if(data) {
+			console.log(data)
           promisse.push(this.getInstanceAxios().get(data));
         }
 
@@ -31,10 +33,12 @@ class Http {
 		const promisse = [];
         if(data && typeof data !== 'string') {
           data.forEach(url => {
+			url = url.replace('http://', 'https://');
             promisse.push(this.getInstanceAxios().get(url))
           });
         }else if(data) {
-          promisse.push(this.getInstanceAxios().get(data));
+			data = data.replace('http://', 'https://');	
+          	promisse.push(this.getInstanceAxios().get(data));
         }          
 		
 		return new Promise((resolve, reject) => 
