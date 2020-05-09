@@ -3,14 +3,16 @@
 #home-component {
     width: 100%;
     height: calc(100vh - 20px);
-    overflow: auto;
+    overflow: hidden;
+    display: inline;
 
     .container-header {
         margin: 0 auto;
         max-width: 485px;
         height: 100px;
         border-radius: 3px;
-        margin-top: 12%;
+        margin-top: 6%;
+        text-align: center;
     }
 
     .container-title {
