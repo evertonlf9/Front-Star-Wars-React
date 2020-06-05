@@ -39,27 +39,27 @@ const MenuComponent = (props) => {
                         <i className="material-icons" aria-hidden="true">home</i>
                         <span>Home</span>                    
                     </a>
-                    <a className="menu-link-dropdown" onClick={handlerNextPage.bind(this,'/character')} onKeyPress={handlerKeyPressNextPage.bind(this, '/character')} tabIndex="0">
+                    <a className={`menu-link-dropdown ${currentPage === '/character' ? 'active' : ''}`} onClick={handlerNextPage.bind(this,'/character')} onKeyPress={handlerKeyPressNextPage.bind(this, '/character')} tabIndex="0">
                         <i className="material-icons" aria-hidden="true">emoji_people</i>
                         <span>Personagens</span>                    
                     </a>
-                    <a className="menu-link-dropdown" onClick={handlerNextPage.bind(this,'/species')} onKeyPress={handlerKeyPressNextPage.bind(this, '/species')} tabIndex="0">
+                    <a className={`menu-link-dropdown ${currentPage === '/species' ? 'active' : ''}`} onClick={handlerNextPage.bind(this,'/species')} onKeyPress={handlerKeyPressNextPage.bind(this, '/species')} tabIndex="0">
                         <i className="material-icons" aria-hidden="true">android</i>
                         <span>Species</span>                      
                     </a>
-                    <a className="menu-link-dropdown" onClick={handlerNextPage.bind(this,'/planets')} onKeyPress={handlerKeyPressNextPage.bind(this, '/planets')} tabIndex="0">
+                    <a className={`menu-link-dropdown ${currentPage === '/planets' ? 'active' : ''}`} onClick={handlerNextPage.bind(this,'/planets')} onKeyPress={handlerKeyPressNextPage.bind(this, '/planets')} tabIndex="0">
                         <i className="material-icons" aria-hidden="true">language</i>
                         <span>Planetas</span>   
                     </a>
-                    <a className="menu-link-dropdown" onClick={handlerNextPage.bind(this,'/films')} onKeyPress={handlerKeyPressNextPage.bind(this, '/films')} tabIndex="0">
+                    <a className={`menu-link-dropdown ${currentPage === '/films' ? 'active' : ''}`} onClick={handlerNextPage.bind(this,'/films')} onKeyPress={handlerKeyPressNextPage.bind(this, '/films')} tabIndex="0">
                         <i className="material-icons" aria-hidden="true">theaters</i>
                         <span>Filmes</span>   
                     </a>
-                    <a className="menu-link-dropdown" onClick={handlerNextPage.bind(this,'/vehicles')} onKeyPress={handlerKeyPressNextPage.bind(this, '/vehicles')} tabIndex="0">
+                    <a className={`menu-link-dropdown ${currentPage === '/vehicles' ? 'active' : ''}`} onClick={handlerNextPage.bind(this,'/vehicles')} onKeyPress={handlerKeyPressNextPage.bind(this, '/vehicles')} tabIndex="0">
                         <i className="material-icons">time_to_leave</i>
                         <span>Veiculos</span>   
                     </a>
-                    <a className="menu-link-dropdown" onClick={handlerNextPage.bind(this,'/starships')} onKeyPress={handlerKeyPressNextPage.bind(this, '/starships')} tabIndex="0">
+                    <a className={`menu-link-dropdown ${currentPage === '/starships' ? 'active' : ''}`} onClick={handlerNextPage.bind(this,'/starships')} onKeyPress={handlerKeyPressNextPage.bind(this, '/starships')} tabIndex="0">
                         <i className="material-icons" aria-hidden="true">airplanemode_active</i>
                         <span>Naves Estelares</span>  
                     </a>

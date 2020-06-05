@@ -61,7 +61,7 @@
 
             span {
                 position: relative;
-                top: 4px;
+                top: 1px;
                 margin: 0 5px;
             }
         }
@@ -85,6 +85,10 @@
                 }
             }
             a:hover {background-color: #ddd;}
+            a.active {
+                background-color: $red;
+                color: white;
+            }
         }
     }
     

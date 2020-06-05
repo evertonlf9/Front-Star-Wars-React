@@ -28,6 +28,11 @@ body {
     margin: 0;
 }
 
+.ant-pagination-total-text {
+    display: inherit;
+    text-align: center;
+}
+
 .starOne {
     @include animationStars(1px, $shadows-small, 50s);
 }
@@ -66,6 +71,15 @@ body {
 @media only screen and (max-width: 825px) {
     .container-header {
         width: 66% !important;
+    }
+}
+
+@media only screen and (max-width: 965px){
+    .dropdown {
+        display: inline-block !important;
+    }
+    .menu-link {
+        display: none !important;
     }
 }
 
